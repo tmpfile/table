@@ -79,9 +79,12 @@ rm f1 f2
 
 sed 's/,*$//' -i table
 
-sort table > table.csv
+sort table -o table
+sed '1 i\,x86,x86_64,armhf,aarch64,ppc64le,s390x' table > complete_table.csv
+
+grep -v ,1,1,1,1,1,1 table > missing_support_table.csv
+sed '1 i\,x86,x86_64,armhf,aarch64,ppc64le,s390x' -i missing_support_table.csv
 rm table
-sed '1 i\,x86,x86_64,armhf,aarch64,ppc64le,s390x' -i table.csv
 
 # We now have a csv file like this
 # ,x86,x86_64,armhf,aarch64,ppc64le,s390x
